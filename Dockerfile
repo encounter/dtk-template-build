@@ -2,7 +2,7 @@ FROM alpine AS dependencies
 RUN apk add --no-cache curl libarchive-tools
 RUN mkdir binutils \
     && curl -L https://github.com/encounter/gc-wii-binutils/releases/2.42-1/download/linux-x86_64.zip \
-       | bsdtar -xvf- -C binutils
+       | bsdtar -xvf- -C binutils \
     && chmod +x binutils/*
 RUN mkdir compilers \
     && curl -L https://files.decomp.dev/compilers_20240706.zip \
