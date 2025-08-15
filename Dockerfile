@@ -5,12 +5,13 @@ RUN mkdir binutils \
        | bsdtar -xvf- -C binutils \
     && chmod +x binutils/*
 RUN mkdir compilers \
-    && curl -L https://files.decomp.dev/compilers_20240706.zip \
+    && curl -L https://files.decomp.dev/compilers_20250812.zip \
        | bsdtar -xvf- -C compilers
 
-FROM ghcr.io/decompals/wibo:0.6.11
+FROM alpine
 COPY orig /orig
 COPY --from=dependencies /binutils /binutils
 COPY --from=dependencies /compilers /compilers
-RUN apk add --no-cache ninja python3 py3-requests git gcompat
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/sbin/
+RUN apk add --no-cache gcompat git ninja python3 tar
 CMD [ "sh" ]
