@@ -13,5 +13,5 @@ COPY orig /orig
 COPY --from=dependencies /binutils /binutils
 COPY --from=dependencies /compilers /compilers
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/sbin/
-RUN apk add --no-cache gcompat git ninja python3 tar
+RUN apk add --no-cache gcompat git ninja python3 tar zstd
 CMD [ "sh" ]
